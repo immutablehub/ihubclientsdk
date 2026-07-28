@@ -1,0 +1,25 @@
+{
+  "name": "ihubclientsdk",
+  "version": "1.2.1",
+  "description": "Immutablehub client SDK",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "immutablehub",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.28.1",
+    "express": "^5.2.1",
+    "g": "^2.0.1",
+    "mongodb": "^7.5.0",
+    "pinata": "^2.5.6",
+    "yaml": "^2.9.0"
+  }
+}
