@@ -4,7 +4,7 @@ import Loader from "./loaderutility.js"
 import  path from "path"
 import  os from "os"
 import fs from "fs"
-import responseformat from "./responseformat.js";
+import Runner from "./runner.js";
 
 
 
@@ -24,9 +24,8 @@ async function getcreds() {
 
 
 
-
-
 async function getRuntime() {
+
 
   const { jwt, gateway } = await getcreds();
   const pinata = new PinataSDK({ pinataJwt: jwt, pinataGateway: gateway });
@@ -37,41 +36,22 @@ async function getRuntime() {
 }
 
 
-export default async  function isp(uri) {
+
+export default async  function app(agentpkg,inputs) {
+
+   //const [folder]=protocolstrip.split("")
+
+    const { pinata, client } = await getRuntime();
+    const spec=await Loader(agentpkg,pinata,client)
 
 
- 
-
-    const cpuri=uri;
-    if (!cpuri.startsWith("isp://")){
-      throw new Error("Invalid ISP URI")
-    }
-
-    if (cpuri ==""){
-      
-      throw new Error("Empty ISP URI provided")
-
-    }
-    
-    const protocolstrip=cpuri.replace("isp://","")
-    const [folder]=protocolstrip.split("/")
-
-    
-
-     const { pinata, client } = await getRuntime();
-
-
-     const context=await Loader(folder,pinata,client)
-
+    console.log("spec in core")
+    console.log(spec.spec)
+    const agentResponse=await Runner(spec.spec,inputs)
+    console.log("agent response")
+    //console.log(agentResponse)
+    return agentResponse;
      
-     return responseformat(
-
-       context.instructions,
-       context.capabilities,
-       context.constraints,
-       context.policies,
-
-    )
 
 }
 
