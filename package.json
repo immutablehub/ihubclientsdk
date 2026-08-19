@@ -1,5 +1,5 @@
 {
-  "name": "ihubclientsdk",
+  "name": "commoneraclientsdk",
   "version": "1.2.1",
   "description": "Immutablehub client SDK",
   "main": "dist/index.js",
